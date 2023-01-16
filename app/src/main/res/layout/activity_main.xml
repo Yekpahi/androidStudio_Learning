@@ -49,15 +49,28 @@
         android:textColor="@color/purple_500"
         app:backgroundTint="@color/white" />
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignBottom="@id/connect"
-    android:layout_alignParentRight="true"
-    android:layout_toRightOf="@id/connect"
-    android:gravity="right"
-    android:text="Créer un compte ?"
-    android:textColor="@color/white"
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:textColor="@color/error"
+        android:textSize="16sp"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/connect"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/connect"
+        android:gravity="right"
+        android:text="Créer un compte ?"
+        android:textColor="@color/white"
     />
 
     <TextView
