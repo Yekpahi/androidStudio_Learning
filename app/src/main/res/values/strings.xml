@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">RelativApp</string>
+    <string name="app_name">Connexion</string>
+    <string name="home">Accueil</string>
 </resources>

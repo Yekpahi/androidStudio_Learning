@@ -1,5 +1,6 @@
 package com.example.relativapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -30,7 +31,15 @@ class MainActivity : AppCompatActivity() {
                 val correctEmail = "prince@gmail.com"
                 val correctPassword = "azerty"
                 if (correctEmail == txtEmail && correctPassword == txtPassword) {
-                    Toast.makeText(this, "Bravo vous pouvez maintenant utiliser Spyfee", Toast.LENGTH_SHORT).show()
+
+
+
+                    //Intent Explicite
+                    Intent(this, HomeActivity::class.java).also {
+                        it.putExtra("email", txtEmail)
+                        startActivity(it)
+                    }
+
                 } else {
                     error.text = "Email ou password n'est pas correct"
                     error.visibility = View.VISIBLE
