@@ -1,7 +1,12 @@
 package com.example.relativapp
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.ListView
+import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,5 +35,36 @@ class HomeActivity : AppCompatActivity() {
         )
         val adapter = PostsAdapter(this, R.layout.item_post, postsArray)
         listPosts.adapter = adapter
+
+        listPosts.setOnItemClickListener { adapterView, view, position, id  ->
+          //Toast.makeText(this, "Position: $position", Toast.LENGTH_LONG).show()
+            val clickedPost = postsArray[position]
+            Intent(this, PostDetailsActivity::class.java).also {
+                it.putExtra("title", clickedPost.title)
+                startActivity(it)
+            }
+      }
+    } // fin onCreate
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.itemAdd -> {
+                Toast.makeText(this, "Add new Post", Toast.LENGTH_SHORT).show()
+            }
+            R.id.itemConfig -> {
+                Toast.makeText(this, "Add Configuration", Toast.LENGTH_SHORT).show()
+
+            }
+            R.id.itemLogout -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
