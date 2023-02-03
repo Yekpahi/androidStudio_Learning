@@ -9,10 +9,8 @@ class PostDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_details)
 
-        val tvTitle = findViewById<TextView>(R.id.tvTitle)
-        val title = intent.getStringExtra("title")
-        tvTitle.text= title
-
-        supportActionBar!!.title = title
+        val tvTitre = findViewById<TextView>(R.id.tvTitre)
+        val titre = intent.getStringExtra("titre")
+        tvTitre.text = titre
     }
 }

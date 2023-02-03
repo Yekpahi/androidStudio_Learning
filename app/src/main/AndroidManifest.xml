@@ -24,9 +24,8 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
             android:label="Accueil"
-            >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

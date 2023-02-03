@@ -2,13 +2,21 @@ package com.example.relativapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.AdapterView
+import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.ListView
 import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
+
+    lateinit var listPosts: ListView
+    var postsArray = ArrayList<Post>()
+    lateinit var adapter: PostsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -25,9 +33,9 @@ class HomeActivity : AppCompatActivity() {
        */
         val email = intent.getStringExtra("email")
 
-        val listPosts = findViewById<ListView>(R.id.listPosts)
-        val postsArray = arrayListOf(
-            Post("Post 1", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image1),
+            listPosts = findViewById<ListView>(R.id.listPosts)
+            postsArray = arrayListOf(
+            Post("Mon post 1", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image1),
             Post("Post 2", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image2),
             Post("Post 3", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image3),
             Post("Post 4", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image4),
@@ -40,7 +48,7 @@ class HomeActivity : AppCompatActivity() {
           //Toast.makeText(this, "Position: $position", Toast.LENGTH_LONG).show()
             val clickedPost = postsArray[position]
             Intent(this, PostDetailsActivity::class.java).also {
-                it.putExtra("title", clickedPost.title)
+                it.putExtra("titre", clickedPost.title)
                 startActivity(it)
             }
       }
@@ -66,5 +74,36 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // Menu on context
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        menuInflater.inflate(R.menu.list_context_menu, menu)
+        super.onCreateContextMenu(menu, v, menuInfo)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info: AdapterView.AdapterContextMenuInfo = item.menuInfo as AdapterContextMenuInfo
+        val position: Int = info.position
+        when(item.itemId) {
+            R.id.itemShow -> {
+
+            Intent(this, PostDetailsActivity::class.java).also {
+                it.putExtra("title", postsArray[position].title)
+                startActivity(it)
+            }
+            //Toast.makeText(this, "show", Toast.LENGTH_SHORT).show()
+            }
+            R.id.itemDelete -> {
+                postsArray.removeAt(position)
+                adapter.notifyDataSetChanged()
+                //Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onContextItemSelected(item)
     }
 }
