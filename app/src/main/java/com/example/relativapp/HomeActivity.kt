@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
             Post("Post 4", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image4),
             Post("Post 5", "Les enfants sont fort dans vaurienh dès. Maos ils sont fouts!", R.drawable.image5),
         )
-        val adapter = PostsAdapter(this, R.layout.item_post, postsArray)
+        adapter = PostsAdapter(this, R.layout.item_post, postsArray)
         listPosts.adapter = adapter
 
         listPosts.setOnItemClickListener { adapterView, view, position, id  ->
@@ -52,8 +52,10 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(it)
             }
       }
+        registerForContextMenu(listPosts)
     } // fin onCreate
 
+    //Optiob menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_menu, menu)
 
@@ -75,9 +77,10 @@ class HomeActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+    // Option menu Fin
 
-    // Menu on context
-    override fun onCreateContextMenu(
+    // Context Menu
+   /* override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
@@ -93,7 +96,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.itemShow -> {
 
             Intent(this, PostDetailsActivity::class.java).also {
-                it.putExtra("title", postsArray[position].title)
+                it.putExtra("titre", postsArray[position].title)
                 startActivity(it)
             }
             //Toast.makeText(this, "show", Toast.LENGTH_SHORT).show()
@@ -106,4 +109,9 @@ class HomeActivity : AppCompatActivity() {
         }
         return super.onContextItemSelected(item)
     }
+
+    */
+    //Fin Context Menu
+
+
 }
