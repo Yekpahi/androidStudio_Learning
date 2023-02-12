@@ -10,6 +10,10 @@ import android.widget.AdapterView
 import android.widget.AdapterView.AdapterContextMenuInfo
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import java.util.stream.DoubleStream.builder
+import java.util.stream.IntStream.builder
+import java.util.stream.Stream.builder
 
 class HomeActivity : AppCompatActivity() {
 
@@ -72,15 +76,37 @@ class HomeActivity : AppCompatActivity() {
 
             }
             R.id.itemLogout -> {
-                finish()
+                //Afficher un dialog de confirmation
+                showLogoutConfigurationDialog()
+                //finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    //Fonction du dialog de confirmation
+    fun showLogoutConfigurationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmation")
+        builder.setMessage("Ëtes vous sûrs de vouloir quitter l'appli")
+        builder.setPositiveButton("Oui") { dialogInterface, id ->
+           finish()
+        }
+        builder.setNegativeButton("Non") { dialogInterface, id ->
+            dialogInterface.dismiss()
+
+        }
+        builder.setNeutralButton("Annuler") { dialogInterface, id ->
+        dialogInterface.dismiss()
+        }
+        val alertDialog : AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
     // Option menu Fin
 
     // Context Menu
-   /* override fun onCreateContextMenu(
+   override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
         menuInfo: ContextMenu.ContextMenuInfo?
@@ -110,7 +136,6 @@ class HomeActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 
-    */
     //Fin Context Menu
 
 
