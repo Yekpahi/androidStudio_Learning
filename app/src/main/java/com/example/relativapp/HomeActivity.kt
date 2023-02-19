@@ -1,4 +1,5 @@
 package com.example.relativapp
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -90,7 +91,13 @@ class HomeActivity : AppCompatActivity() {
         builder.setTitle("Confirmation")
         builder.setMessage("Ëtes vous sûrs de vouloir quitter l'appli")
         builder.setPositiveButton("Oui") { dialogInterface, id ->
-           finish()
+
+            //SharePreference remove after deconnection
+            val editor = this.getSharedPreferences("app_state", Context.MODE_PRIVATE).edit()
+            editor.remove("is_authentificated")
+            editor.apply()
+            //fin
+            finish()
         }
         builder.setNegativeButton("Non") { dialogInterface, id ->
             dialogInterface.dismiss()
